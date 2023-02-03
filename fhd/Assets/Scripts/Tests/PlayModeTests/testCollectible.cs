@@ -18,13 +18,13 @@ public class testCollectible
     }
     
     [UnityTest]
-    public IEnumerator testCollectibleCanExist() {
+    public IEnumerator TestCollectibleCanExist() {
         Assert.NotNull(_collectible);
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator testCollectibleIncreasesCollectedStateWhenCollected()
+    public IEnumerator TestCollectibleIncreasesCollectedStateWhenCollected()
     {
         Assert.That(CollectibleState.Instance.collectablesCollected, Is.EqualTo(0));
         _collectible.Collect();
