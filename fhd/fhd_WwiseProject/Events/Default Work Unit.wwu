@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" SchemaVersion="110">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Level1Music" ID="{91985C11-DDB4-4E93-AE6A-3A486BAC0693}">
+					<ChildrenList>
+						<Action Name="" ID="{276D025F-DDEC-44FE-9288-406A9BF4EAE6}" ShortID="675977065">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Level1Music" ID="{EA3E3A91-428F-45DF-8579-ED3AFFF9F880}" WorkUnitID="{2B8047BF-1BD2-4922-9D3C-640EE916A8F7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_Level1Music" ID="{A73DAA01-1373-419E-B36A-EDF81D7BEE27}">
+					<ChildrenList>
+						<Action Name="" ID="{ABFDF910-AAC3-4E49-8932-23B266EC4262}" ShortID="527291989">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Level1Music" ID="{EA3E3A91-428F-45DF-8579-ED3AFFF9F880}" WorkUnitID="{2B8047BF-1BD2-4922-9D3C-640EE916A8F7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Set_Voice_Pitch_Level1Music" ID="{9B88A63A-9752-46E6-81F0-6692955711E6}">
+					<ChildrenList>
+						<Action Name="" ID="{D257C905-255B-461B-BB87-716E556AB753}" ShortID="537997494">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="13"/>
+								<Property Name="FadeTime" Type="Real64" Value="2"/>
+								<Property Name="Pitch" Type="int32" Value="600"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Level1Music" ID="{EA3E3A91-428F-45DF-8579-ED3AFFF9F880}" WorkUnitID="{2B8047BF-1BD2-4922-9D3C-640EE916A8F7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Reset_Voice_Pitch_Level1Music" ID="{0631A6F1-F812-4FD4-AE49-ED0C66A8496E}">
+					<ChildrenList>
+						<Action Name="" ID="{B146C22B-FAE9-46D1-BF20-30EC8952F8A5}" ShortID="144784971">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="18"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Level1Music" ID="{EA3E3A91-428F-45DF-8579-ED3AFFF9F880}" WorkUnitID="{2B8047BF-1BD2-4922-9D3C-640EE916A8F7}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

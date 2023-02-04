@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	698863348	Stop_Level1Music			\Default Work Unit\Stop_Level1Music	
+	1336571183	Reset_Voice_Pitch_Level1Music			\Default Work Unit\Reset_Voice_Pitch_Level1Music	
+	2229544954	Set_Voice_Pitch_Level1Music			\Default Work Unit\Set_Voice_Pitch_Level1Music	
+	3605952550	Play_Level1Music			\Default Work Unit\Play_Level1Music	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	544298725	Level_1	C:\fhd-global-game-jam\fhd\fhd_WwiseProject\.cache\Mac\SFX\Level_1_3D5B65DD.wem		\Actor-Mixer Hierarchy\Default Work Unit\Level1Music\Level_1		52250208
+

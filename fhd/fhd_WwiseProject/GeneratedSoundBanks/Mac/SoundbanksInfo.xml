@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="16" SoundBankVersion="145">
+	<RootPaths>
+		<ProjectRoot>../..</ProjectRoot>
+		<SourceFilesRoot>../../.cache/Mac</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>.</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1321655446" Type="User" Language="SFX" Hash="{8BC5C8FA-F91C-B1C5-87DD-00510789C713}">
+			<ShortName>LevelMusic</ShortName>
+			<Path>LevelMusic.bnk</Path>
+			<Media>
+				<File Id="544298725" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Level_1.wav</ShortName>
+					<CachePath>SFX/Level_1_3D5B65DD.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="3605952550" Name="Play_Level1Music" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="544298725"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1336571183" Name="Reset_Voice_Pitch_Level1Music" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2229544954" Name="Set_Voice_Pitch_Level1Music" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="698863348" Name="Stop_Level1Music" MaxAttenuation="0" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+			</Events>
+		</SoundBank>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{F56A610C-C7C4-F874-B68B-7ADDF94EBB7A}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{3EA76AE4-C996-7AE9-C498-46FCC6EB326D}</FileHash>
+</SoundBanksInfo>

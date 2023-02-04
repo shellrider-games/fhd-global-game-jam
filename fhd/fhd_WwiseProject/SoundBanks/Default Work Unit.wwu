@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{5B5828E5-529F-4847-B436-F213EB8F5C4F}" SchemaVersion="110">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{5B5828E5-529F-4847-B436-F213EB8F5C4F}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="LevelMusic" ID="{BF1B62A0-CA58-4695-BFD1-85DDA4799C9D}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Stop_Level1Music" ID="{A73DAA01-1373-419E-B36A-EDF81D7BEE27}" WorkUnitID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Set_Voice_Pitch_Level1Music" ID="{9B88A63A-9752-46E6-81F0-6692955711E6}" WorkUnitID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Level1Music" ID="{91985C11-DDB4-4E93-AE6A-3A486BAC0693}" WorkUnitID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Reset_Voice_Pitch_Level1Music" ID="{0631A6F1-F812-4FD4-AE49-ED0C66A8496E}" WorkUnitID="{EA7A0F18-BC63-4900-94B5-4215A5DC000F}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>
