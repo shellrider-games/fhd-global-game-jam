@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public float speed = 5f;
 
     [SerializeField] private float jumpforce;
+    [SerializeField] private Collider playerCollider;
 
     private void Start()
     {
@@ -74,17 +75,18 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     { 
+        if(!IsGrounded()) return;
         _jumpVector = new Vector3(0, jumpforce, 0);
     }
 
-    public void Move()
+    private void Move()
     {
         _rigidbody.velocity = new Vector3(0,_rigidbody.velocity.y, 0);
         ApplyMoveRelativeToCamera();
         ApplyJump();
     }
 
-    public void ApplyMoveRelativeToCamera()
+    private void ApplyMoveRelativeToCamera()
     {
         var cameraTransform = _mainCamera.transform;
         var cameraForward = cameraTransform.forward;
@@ -98,5 +100,11 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
         var direction = cameraForward * _moveInput.y + cameraRight * _moveInput.x;
         this._rigidbody.velocity += direction.normalized * speed;
+    }
+
+    private bool IsGrounded()
+    {
+        var distanceToGround = playerCollider.bounds.extents.y;
+        return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
     }
  }
