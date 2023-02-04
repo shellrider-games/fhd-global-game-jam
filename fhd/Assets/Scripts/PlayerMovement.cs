@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     private InputActions _inputAction;
 
-    public Vector3 _movementDirection;
-    public float _speed = 5f;
+    public Vector3 movementDirection;
+    public float speed = 5f;
 
     private void Start()
     {
@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     void Update()
     {
-        // gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
         MovePlayerRelativeToCamera();
     }
 
@@ -54,7 +53,7 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
-        _movementDirection = new Vector3(moveVector.y, 0, moveVector.x);
+        movementDirection = new Vector3(moveVector.y, 0, moveVector.x);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -76,10 +75,10 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
         _cameraForward = _cameraForward.normalized;
         _cameraRight = _cameraRight.normalized;
 
-        Vector3 forwardRelativeInput = _movementDirection.x * _cameraForward;
-        Vector3 rightRelativeInput = _movementDirection.z * _cameraRight;
+        Vector3 forwardRelativeInput = movementDirection.x * _cameraForward;
+        Vector3 rightRelativeInput = movementDirection.z * _cameraRight;
 
         Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
-        gameObject.transform.Translate(cameraRelativeMovement * (_speed * Time.deltaTime), Space.World);
+        gameObject.transform.Translate(cameraRelativeMovement * (speed * Time.deltaTime), Space.World);
     }
  }
