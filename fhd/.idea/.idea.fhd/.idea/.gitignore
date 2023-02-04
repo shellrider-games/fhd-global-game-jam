@@ -1,7 +1,17 @@
+﻿<<<<<<< HEAD
 ﻿# Default ignored files
 /shelf/
 /workspace.xml
 # Rider ignored files
+/.idea.fhd.iml
+/modules.xml
+/projectSettingsUpdater.xml
+=======
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
 /.idea.fhd.iml
 /modules.xml
 /projectSettingsUpdater.xml
