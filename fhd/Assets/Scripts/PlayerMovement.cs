@@ -8,18 +8,22 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 {
 
+    private Vector3 cameraForward;
+    private Vector3 cameraRight;
+    
     public Action OnJumpPerformed;
     private Vector2 MouseDelta;
 
     private InputActions _inputAction;
 
-    private Vector3 _movementDirection;
+    public Vector3 _movementDirection;
     public float _speed = 5f;
 
 
     void Update()
     {
-        gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
+        // gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
+        MovePlayerRelativeToCamera();
     }
 
     private void OnEnable()
@@ -44,7 +48,8 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _movementDirection = context.ReadValue<Vector2>();
+        Vector2 moveVector = context.ReadValue<Vector2>();
+        _movementDirection = new Vector3(moveVector.x, 0, moveVector.y);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -54,4 +59,22 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
          OnJumpPerformed?.Invoke();
     }
-}
+
+    public void MovePlayerRelativeToCamera()
+    {
+        cameraForward = Camera.main.transform.forward;
+        cameraRight = Camera.main.transform.right;
+
+        cameraForward = new Vector3(cameraForward.x, 0, cameraForward.z);
+        cameraRight = new Vector3(cameraRight.x, 0, cameraRight.z);
+
+        cameraForward = cameraForward.normalized;
+        cameraRight = cameraRight.normalized;
+
+        Vector3 forwardRelativeInput = _movementDirection.x * cameraForward;
+        Vector3 rightRelativeInput = _movementDirection.z * cameraRight;
+
+        Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
+        gameObject.transform.Translate(cameraRelativeMovement * (_speed * Time.deltaTime), Space.World);
+    }
+ }
