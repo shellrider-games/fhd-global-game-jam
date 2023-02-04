@@ -8,18 +8,27 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 {
 
+    private Camera _mainCamera;
+    private Vector3 _cameraForward;
+    private Vector3 _cameraRight;
+    
     public Action OnJumpPerformed;
     private Vector2 MouseDelta;
 
     private InputActions _inputAction;
 
-    private Vector3 _movementDirection;
+    public Vector3 _movementDirection;
     public float _speed = 5f;
 
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+    }
 
     void Update()
     {
-        gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
+        // gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
+        MovePlayerRelativeToCamera();
     }
 
     private void OnEnable()
@@ -44,7 +53,8 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _movementDirection = context.ReadValue<Vector2>();
+        Vector2 moveVector = context.ReadValue<Vector2>();
+        _movementDirection = new Vector3(moveVector.y, 0, moveVector.x);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -54,4 +64,22 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
          OnJumpPerformed?.Invoke();
     }
-}
+
+    public void MovePlayerRelativeToCamera()
+    {
+        _cameraForward = _mainCamera.transform.forward;
+        _cameraRight = _mainCamera.transform.right;
+
+        _cameraForward = new Vector3(_cameraForward.x, 0, _cameraForward.z);
+        _cameraRight = new Vector3(_cameraRight.x, 0, _cameraRight.z);
+
+        _cameraForward = _cameraForward.normalized;
+        _cameraRight = _cameraRight.normalized;
+
+        Vector3 forwardRelativeInput = _movementDirection.x * _cameraForward;
+        Vector3 rightRelativeInput = _movementDirection.z * _cameraRight;
+
+        Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
+        gameObject.transform.Translate(cameraRelativeMovement * (_speed * Time.deltaTime), Space.World);
+    }
+ }
