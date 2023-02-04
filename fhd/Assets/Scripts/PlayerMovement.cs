@@ -1,17 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 
 public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 {
 
     private Camera _mainCamera;
-    private Vector3 _cameraForward;
-    private Vector3 _cameraRight;
-
+    
     private Rigidbody _rigidbody;
     
     private Vector2 MouseDelta;
@@ -19,7 +20,8 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     private InputActions _inputAction;
 
     private Vector3 _jumpVector;
-    
+    private Vector2 _moveInput;
+
     public Vector3 movementDirection;
     public float speed = 5f;
 
@@ -29,13 +31,13 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     {
         _mainCamera = Camera.main;
         _jumpVector = new Vector3();
-        this._rigidbody = GetComponent<Rigidbody>();
+        _moveInput = new Vector2();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        MovePlayerRelativeToCamera();
-        ApplyJumpVector();
+        Move();
     }
 
     private void OnEnable()
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
         _inputAction.Player.Enable();
     }
 
-    private void ApplyJumpVector()
+    private void ApplyJump()
     {
         this._rigidbody.velocity += _jumpVector;
         _jumpVector = new Vector3();
@@ -67,32 +69,34 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
-        movementDirection = new Vector3(moveVector.y, 0, moveVector.x);
+        _moveInput = moveVector;
     }
 
     public void OnJump(InputAction.CallbackContext context)
-    {
-        this._jumpVector = new Vector3(0, jumpforce, 0);
+    { 
+        _jumpVector = new Vector3(0, jumpforce, 0);
     }
-    
-    
 
-    public void MovePlayerRelativeToCamera()
+    public void Move()
     {
-        _cameraForward = _mainCamera.transform.forward;
-        _cameraRight = _mainCamera.transform.right;
+        _rigidbody.velocity = new Vector3(0,_rigidbody.velocity.y, 0);
+        ApplyMoveRelativeToCamera();
+        ApplyJump();
+    }
 
-        _cameraForward = new Vector3(_cameraForward.x, 0, _cameraForward.z);
-        _cameraRight = new Vector3(_cameraRight.x, 0, _cameraRight.z);
+    public void ApplyMoveRelativeToCamera()
+    {
+        var cameraTransform = _mainCamera.transform;
+        var cameraForward = cameraTransform.forward;
+        var cameraRight = cameraTransform.right;
 
-        _cameraForward = _cameraForward.normalized;
-        _cameraRight = _cameraRight.normalized;
-
-        Vector3 forwardRelativeInput = movementDirection.x * _cameraForward;
-        Vector3 rightRelativeInput = movementDirection.z * _cameraRight;
-        Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
+        cameraForward = new Vector3(cameraForward.x, 0, cameraForward.z);
+        cameraRight = new Vector3(cameraRight.x, 0, cameraRight.z);
         
-        
-        gameObject.transform.Translate(cameraRelativeMovement * (speed * Time.deltaTime), Space.World);
+        cameraForward = cameraForward.normalized;
+        cameraRight = cameraRight.normalized;
+
+        var direction = cameraForward * _moveInput.y + cameraRight * _moveInput.x;
+        this._rigidbody.velocity += direction.normalized * speed;
     }
  }
