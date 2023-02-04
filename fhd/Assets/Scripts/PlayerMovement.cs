@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +18,9 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public Vector3 _movementDirection;
     public float _speed = 5f;
 
+    private RaycastHit _raycastHit;
+    private float hitDistance = 5f;
+
     private void Start()
     {
         _mainCamera = Camera.main;
@@ -27,8 +28,9 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     void Update()
     {
-        // gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
+        gameObject.transform.Translate(_movementDirection * (_speed * Time.deltaTime));
         MovePlayerRelativeToCamera();
+        RayCaster();
     }
 
     private void OnEnable()
@@ -82,4 +84,22 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
         Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
         gameObject.transform.Translate(cameraRelativeMovement * (_speed * Time.deltaTime), Space.World);
     }
- }
+
+    public void JumpHandler()
+    {
+        
+    }
+
+    private void RayCaster()
+    {
+        if (Physics.Raycast(gameObject.transform.position, transform.TransformDirection(Vector3.down), out _raycastHit,
+                hitDistance))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * _raycastHit.distance, Color.yellow);
+        } else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * 1000, Color.white);
+            Debug.Log("Did not Hit");
+        }
+    }
+ } 
