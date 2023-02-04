@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     void Update()
     {
         Move();
+        FaceInMoveDirection();
     }
 
     private void OnEnable()
@@ -106,5 +108,16 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     {
         var distanceToGround = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, distanceToGround + 0.1f);
+    }
+
+    private void FaceInMoveDirection()
+    {
+        var rigidbodyVelocity = _rigidbody.velocity;
+        if(rigidbodyVelocity.x == 0 && rigidbodyVelocity.z == 0) return;
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(new Vector3(rigidbodyVelocity.x, 0, rigidbodyVelocity.z)),
+            Time.deltaTime * 5f
+            );
     }
  }
