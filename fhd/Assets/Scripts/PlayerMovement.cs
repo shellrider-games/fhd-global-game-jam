@@ -8,8 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 {
 
-    private Vector3 cameraForward;
-    private Vector3 cameraRight;
+    private Camera _mainCamera;
+    private Vector3 _cameraForward;
+    private Vector3 _cameraRight;
     
     public Action OnJumpPerformed;
     private Vector2 MouseDelta;
@@ -19,6 +20,10 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public Vector3 _movementDirection;
     public float _speed = 5f;
 
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+    }
 
     void Update()
     {
@@ -49,7 +54,7 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
-        _movementDirection = new Vector3(moveVector.x, 0, moveVector.y);
+        _movementDirection = new Vector3(moveVector.y, 0, moveVector.x);
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -62,17 +67,17 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     public void MovePlayerRelativeToCamera()
     {
-        cameraForward = Camera.main.transform.forward;
-        cameraRight = Camera.main.transform.right;
+        _cameraForward = _mainCamera.transform.forward;
+        _cameraRight = _mainCamera.transform.right;
 
-        cameraForward = new Vector3(cameraForward.x, 0, cameraForward.z);
-        cameraRight = new Vector3(cameraRight.x, 0, cameraRight.z);
+        _cameraForward = new Vector3(_cameraForward.x, 0, _cameraForward.z);
+        _cameraRight = new Vector3(_cameraRight.x, 0, _cameraRight.z);
 
-        cameraForward = cameraForward.normalized;
-        cameraRight = cameraRight.normalized;
+        _cameraForward = _cameraForward.normalized;
+        _cameraRight = _cameraRight.normalized;
 
-        Vector3 forwardRelativeInput = _movementDirection.x * cameraForward;
-        Vector3 rightRelativeInput = _movementDirection.z * cameraRight;
+        Vector3 forwardRelativeInput = _movementDirection.x * _cameraForward;
+        Vector3 rightRelativeInput = _movementDirection.z * _cameraRight;
 
         Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
         gameObject.transform.Translate(cameraRelativeMovement * (_speed * Time.deltaTime), Space.World);
