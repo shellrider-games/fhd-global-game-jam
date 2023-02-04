@@ -11,23 +11,31 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
     private Camera _mainCamera;
     private Vector3 _cameraForward;
     private Vector3 _cameraRight;
+
+    private Rigidbody _rigidbody;
     
-    public Action OnJumpPerformed;
     private Vector2 MouseDelta;
 
     private InputActions _inputAction;
 
+    private Vector3 _jumpVector;
+    
     public Vector3 movementDirection;
     public float speed = 5f;
+
+    [SerializeField] private float jumpforce;
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        _jumpVector = new Vector3();
+        this._rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         MovePlayerRelativeToCamera();
+        ApplyJumpVector();
     }
 
     private void OnEnable()
@@ -40,6 +48,12 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
         _inputAction.Player.Enable();
     }
 
+    private void ApplyJumpVector()
+    {
+        this._rigidbody.velocity += _jumpVector;
+        _jumpVector = new Vector3();
+    }
+    
     public void OnDisable()
     {
         _inputAction.Player.Disable();
@@ -58,11 +72,10 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            return;
-
-         OnJumpPerformed?.Invoke();
+        this._jumpVector = new Vector3(0, jumpforce, 0);
     }
+    
+    
 
     public void MovePlayerRelativeToCamera()
     {
@@ -77,8 +90,9 @@ public class PlayerMovement : MonoBehaviour, InputActions.IPlayerActions
 
         Vector3 forwardRelativeInput = movementDirection.x * _cameraForward;
         Vector3 rightRelativeInput = movementDirection.z * _cameraRight;
-
         Vector3 cameraRelativeMovement = forwardRelativeInput + rightRelativeInput;
+        
+        
         gameObject.transform.Translate(cameraRelativeMovement * (speed * Time.deltaTime), Space.World);
     }
  }
