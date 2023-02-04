@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Folder
-  m_Shader: {fileID: -6465566751694194690, guid: 6b795ab0b749d4401a1335748a481408,
+  m_Name: FloorHexxed
+  m_Shader: {fileID: -6465566751694194690, guid: d1849c48461a042b4afa5fbc0e68629b,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -61,6 +61,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_734acd277dd64b38948584e0ffe268ef_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 98a98940c64544cfe9a667d85dd950ed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -93,10 +97,10 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GlowStrength: 0.02
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Power: 0.2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -108,14 +112,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.12775902, g: 0.83589226, b: 0.9339623, a: 1}
-    - _Color: {r: 0.12775898, g: 0.83589226, b: 0.9339623, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.3679245, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlowColor: {r: 0, g: 1, b: 0.961242, a: 0}
-    - _ObjectColor: {r: 0.10399607, g: 0.45511872, b: 0.5377358, a: 0.5568628}
+    - _ScrollSpeed: {r: 0, g: 0.02, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3058199200808548694
+--- !u!114 &9111659572425281675
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
